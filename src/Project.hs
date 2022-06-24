@@ -10,7 +10,7 @@ import Data.Maybe
 import Codec.Midi
 
 run :: IO ()
-run = visualise
+run = convertToMidi
 
 convertToMidi :: IO ()
 convertToMidi = exportFile "my-midi.mid" myMidi

@@ -38,9 +38,9 @@ library
       src
   ghc-options: -Wall -fno-warn-type-defaults
   build-depends:
-      base >=4.7 && <5
+      HCodecs
+    , base >=4.7 && <5
     , codeworld-api
-    , HCodecs
   default-language: Haskell2010
 
 executable haskell-codeworld-template
@@ -51,7 +51,8 @@ executable haskell-codeworld-template
       app
   ghc-options: -Wall -fno-warn-type-defaults -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HCodecs
+    , base >=4.7 && <5
     , codeworld-api
     , haskell-codeworld-template
   default-language: Haskell2010
@@ -64,6 +65,7 @@ test-suite doctests
   ghc-options: -Wall -fno-warn-type-defaults
   build-depends:
       Glob
+    , HCodecs
     , QuickCheck
     , base
     , codeworld-api
@@ -83,7 +85,8 @@ test-suite spec
   build-tool-depends:
       hspec-discover:hspec-discover
   build-depends:
-      base >=4.7 && <5
+      HCodecs
+    , base >=4.7 && <5
     , codeworld-api
     , haskell-codeworld-template
     , hspec
