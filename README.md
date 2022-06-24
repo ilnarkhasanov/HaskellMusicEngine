@@ -2,7 +2,9 @@
 
 ![Visualisation demo.](images/Visualisation-example.jpeg)
 
-This is a template project using `codeworld-api` package, ready to be used with either Cabal or Stack. The project also contains `hspec` (with automatic discovery of specification files) and `doctest` test suites.
+This is a project using `codeworld-api` package, ready to be used with either Cabal or Stack. The project also contains `hspec` (with automatic discovery of specification files) and `doctest` test suites.
+
+The project can be used to either visualise text notation with sheet music and convert it into MIDI file. 
 
 ## Prerequisites
 
@@ -13,6 +15,8 @@ There is IDE support for Cabal and Haskell through Haskell Language Server, in p
 However, note that many of Haskell developers use Vim or Emacs with separate REPL (e.g. via `cabal v2-repl`) and [`ghcid`](https://github.com/ndmitchell/ghcid#readme).
 
 ## How to use
+
+
 
 ### Using Cabal
 
