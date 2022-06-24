@@ -1,4 +1,4 @@
-# Haskell project template with CodeWorld
+# Haskell music engine
 
 ![Hello world demo.](images/hello-world.png)
 
