@@ -16,7 +16,7 @@ However, note that many of Haskell developers use Vim or Emacs with separate REP
 
 ## How to use
 
-![Notation used in the exampe at the top.](images/Notation-example.txt.jpeg)
+![Notation used in the exampe at the top.](images/Notation-example.txt)
 
 ### Using Cabal
 
