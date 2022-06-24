@@ -1,6 +1,6 @@
 # Haskell music engine
 
-![Hello world demo.](images/hello-world.png)
+![Hello world demo.](images/Visualisation example.png)
 
 This is a template project using `codeworld-api` package, ready to be used with either Cabal or Stack. The project also contains `hspec` (with automatic discovery of specification files) and `doctest` test suites.
 
