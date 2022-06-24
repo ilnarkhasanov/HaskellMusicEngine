@@ -18,7 +18,9 @@ However, note that many of Haskell developers use Vim or Emacs with separate REP
 Write your composition in an array format into myComposition, where each element is a symbol in format ither (Rest duration) for rests, either (Note octave pitch duration) for notes.
 
 Octave - the number of the octave where the note is placed, Int in range of (0..10). 5th octave is considered as main.
+
 Pitch - Heigth of note, using standart format of note names. One of the following: C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B.
+
 Duration - how long the note/rest will last. One of the following, in descending order: Whole, Half, Quarter, Eigth, Sixteen.
 
 To convert your notation into midi, put convertToMidi into run function. To write it with sheet music, put visualize there.
