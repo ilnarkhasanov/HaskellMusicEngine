@@ -83,6 +83,4 @@ stack test
 
 ### With Visual Studio Code
 
-One way to use VS Code is to open a browser tab, pointing to [http://localhost:3000](http://localhost:3000).
-
-![Sample VS Code setup.](images/vs-code-setup.png)
+One way to use VS Code is to open a browser tab, pointing to [http://localhost:3000](http://localhost:3000)
