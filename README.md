@@ -24,6 +24,8 @@ Duration - how long the note/rest will last. One of the following, in descending
 To convert your notation into midi, put convertToMidi into run function. To write it with sheet music, put visualize there.
 
 ![Notation used in the exampe at the top.](images/Notation-example.txt)
+![Midi output from this example.](images/Midi-example.mid)
+![Output in mp3 format.](images/Mp3-example.mp3)
 
 ### Using Cabal
 
