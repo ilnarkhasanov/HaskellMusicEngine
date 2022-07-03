@@ -15,8 +15,8 @@ staffRenderer n = staff <> translated 0 (-2) (staffRenderer (n-1))
 -- This function this gets the composition in Melody and renders the picture correspondingly
 compositionRenderer :: Composition -> Double -> Picture
 compositionRenderer (Composition []) _ = blank
-compositionRenderer (Composition (symbol:symbols)) n = translated (n - (24 * getRowNumber n * (-1 / 2)))
-  (getRowNumber n) (symbolToPicture symbol)
+compositionRenderer (Composition (symbol:symbols)) n =
+  translated (n - (24 * getRowNumber n * (-1 / 2))) (getRowNumber n) (symbolToPicture symbol)
   <> compositionRenderer (Composition symbols) (n + symbolLength symbol)
 
 -- This function gets the number of the row according to the x-axis coordinate
