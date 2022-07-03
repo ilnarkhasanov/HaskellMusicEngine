@@ -36,5 +36,6 @@ executable HaskellMusicEngine
     ghc-options: -Wall -fno-warn-type-defaults -threaded -rtsopts -with-rtsopts=-N
     build-depends:
          base >=4.7 && < 5
+      ,  strings == 1.1
       ,  codeworld-api
     default-language: Haskell2010

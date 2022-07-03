@@ -6,7 +6,7 @@ type Octave = Int
 data Pitch = C | Cs | D | Ds | E | F | Fs | G | Gs | A | As | B
            deriving Show
 data Duration = Whole | Half | Quarter | Eight | Sixteen
-              deriving Show
+              deriving (Show, Read)
 data Symbol = Note Octave Pitch Duration | Rest Duration
             deriving Show
 newtype Composition = Composition [Symbol]
