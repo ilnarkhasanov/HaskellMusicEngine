@@ -2,10 +2,10 @@
 
 module Sprites where
 
--- We import CodeWorld for rendering symbols
--- Wr import Data.Text() for the using "lettering" function
+import Data.Text ()  -- Importing instances from `Data.Text` to enable
+                     -- string literals as `Data.Text.Text` interpretation
+                     -- for `CodeWorld.lettering`
 import CodeWorld
-import Data.Text ()
 
 -- This is the sprite for the whole note
 wholeNote :: Picture
