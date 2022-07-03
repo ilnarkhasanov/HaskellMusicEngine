@@ -81,16 +81,30 @@ parsePitch s = parsePitchUpper (strToUpper s)
         parsePitchUpper _    = Nothing
 
 
--- Just an ugly way to split by whitespace (TODO: improve)
 pretokenize :: String -> [String]
-pretokenize "" = []
-pretokenize (' ':s) = "":pretokenize s
-pretokenize ('\r':s) = "":pretokenize s
-pretokenize ('\n':s) = "":pretokenize s
-pretokenize (c:s) =
-    case pretokenize s of
-         [] -> [c:""]
-         (tok:toks) -> (c:tok):toks
+pretokenize s = dropEmpty (splitBy [' ', '\r', '\n'] s)
+    where
+        dropEmpty = filter notEmpty
+        notEmpty [] = False
+        notEmpty _ = True
+
+-- | Splits a sequence of elements ("alphas") by specified alphas.
+-- |
+-- | Given the sequence of alphas that should serve as splitters and
+-- | an input (that is a list of alphas), splits the input by splitters
+-- | and returns a list of lists of alphas.
+splitBy
+    :: Eq alpha
+    => [alpha]    -- ^ Splitters
+    -> [alpha]    -- ^ Input
+    -> [[alpha]]  -- ^ Split result
+splitBy _splitters [] = []
+splitBy splitters (i:rest) =
+    if elem i splitters
+       then [] : splitBy splitters rest
+       else case splitBy splitters rest of
+                 [] -> [[i]]
+                 (tok:toks) -> (i:tok):toks
 
 
 -- | Try to parse the given string to a composition.
