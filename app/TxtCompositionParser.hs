@@ -32,7 +32,7 @@ transition Init "Note" = Just (NoteExpectOctave, Nothing)
 transition RestExpectDur s =
     case parseDuration s of
          Nothing  -> Nothing
-         Just dur -> Just (Init, Just $ Rest dur)
+         Just dur -> Just (Init, Just (Rest dur))
 
 transition NoteExpectOctave s =
     case parseOctave s of
@@ -45,7 +45,7 @@ transition (NoteExpectPitch oct) s =
 transition (NoteExpectDur oct pitch) s =
     case parseDuration s of
          Nothing  -> Nothing
-         Just dur -> Just (Init, Just $ Note oct pitch dur)
+         Just dur -> Just (Init, Just (Note oct pitch dur))
 
 transition _ _ = Nothing
 
@@ -115,4 +115,4 @@ parseComposition s =
     let pretokens = pretokenize s in
         case TOP.parse pretokens Init isFinal transition of
              Left err  -> Left err
-             Right out -> Right $ Composition out
+             Right out -> Right (Composition out)
