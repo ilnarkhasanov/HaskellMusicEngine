@@ -55,12 +55,12 @@ parseDuration = readMaybe
 
 -- | Convert a string to an octave number, if possible.
 --
--- Note: only octaves 2 to 8 are allowed.
+-- Note: only octaves 0 to 9 are allowed.
 parseOctave :: String -> Maybe Octave
 parseOctave s =
     case readMaybe s of
          Nothing -> Nothing
-         Just n -> if 2 <= n && n <= 8 then Just n else Nothing
+         Just n -> if 0 <= n && n <= 9 then Just n else Nothing
 
 -- | Parse pitch in a case-insensitive manner, if possible
 parsePitch :: String -> Maybe Pitch  -- Note:
