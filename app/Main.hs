@@ -23,11 +23,11 @@ myMidi = Midi { fileType = MultiTrack,
                 tracks   = [compositionToMidi myComposition] 
     }
 
-convertToMidi :: IO ()
-convertToMidi = exportFile "my-midi.mid" myMidi
+exportMidi :: String -> Midi -> IO ()
+exportMidi path midi = exportFile path midi
 
-visualise :: Composition -> IO ()
-visualise composition = drawingOf (translated (-11) 0 (compositionRenderer composition 0) 
+visualize :: Composition -> IO ()
+visualize composition = drawingOf (translated (-11) 0 (compositionRenderer composition 0) 
   <> staffRenderer (ceiling (durSum composition / 24)))
 
 -- This is our composition
@@ -71,14 +71,19 @@ myComposition = Composition [Rest Quarter,
                       Note 5 B Quarter,
                       Note 6 C Whole]
 
-txtCompositionParserMain :: String -> IO ()
-txtCompositionParserMain path = do
-    f <- openFile path ReadMode
-    content <- hGetContents f
-    print (parseComposition content)
-
 
 main :: IO ()
 main = do
-  args <- getArgs
-  txtCompositionParserMain (head args)  -- No main function yet
+    cmdLineArgs <- getArgs
+    let filePath = head cmdLineArgs
+    f <- openFile filePath ReadMode
+    content <- hGetContents f
+
+    case parseComposition content of
+         Left err -> do
+             putStrLn "Failed to parse the composition. Additional info:"
+             print err
+         Right composition -> do
+             print composition
+             -- exportMidi (filePath ++ ".midi") (compositionToMidi composition)
+             visualize composition

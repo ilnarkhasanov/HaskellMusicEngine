@@ -20,7 +20,6 @@ version:            0.1.0.0
 -- copyright:
 -- category:
 extra-source-files:
-    CHANGELOG.md
     README.md
 
 executable HaskellMusicEngine
