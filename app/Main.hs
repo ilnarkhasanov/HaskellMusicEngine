@@ -6,6 +6,10 @@ import SampleModule
 import Common
 import MelodyMidi
 import Renderer.Renderer
+import System.IO
+
+import SampleModule
+import TxtCompositionParser
 
 import CodeWorld
 
@@ -65,6 +69,13 @@ myComposition = Composition [Rest Quarter,
                       Note 5 Gs Quarter,
                       Note 5 B Quarter,
                       Note 6 C Whole]
+
+txtCompositionParserMain :: IO ()
+txtCompositionParserMain = do
+    f <- openFile "sample_composition.txt" ReadMode
+    content <- hGetContents f
+    print (parseComposition content)
+
 
 main :: IO ()
 main = return ()  -- No main function yet
