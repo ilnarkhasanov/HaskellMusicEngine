@@ -12,6 +12,7 @@ import SampleModule
 import TxtCompositionParser
 
 import CodeWorld
+import System.Environment (getArgs)
 
 sampleModuleMain :: IO ()
 sampleModuleMain = showSamplePicture
@@ -70,12 +71,14 @@ myComposition = Composition [Rest Quarter,
                       Note 5 B Quarter,
                       Note 6 C Whole]
 
-txtCompositionParserMain :: IO ()
-txtCompositionParserMain = do
-    f <- openFile "sample_composition.txt" ReadMode
+txtCompositionParserMain :: String -> IO ()
+txtCompositionParserMain path = do
+    f <- openFile path ReadMode
     content <- hGetContents f
     print (parseComposition content)
 
 
 main :: IO ()
-main = return ()  -- No main function yet
+main = do
+  args <- getArgs
+  txtCompositionParserMain (head args)  -- No main function yet
