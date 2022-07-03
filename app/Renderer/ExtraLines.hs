@@ -14,7 +14,7 @@ upperLine dy = translated 0 (1 + (1/5) * dy) (solidRectangle 0.5 0.015)
 -- This function adds the extra lines to the picture
 addLines :: Symbol -> Picture
 addLines (Note octave pitch duration)
-  | octaveToDouble octave > 0
+  | (octave - 5)> 0
     = DL.foldr (<>) blank (DL.take (symbolUpperLinesNum (Note octave pitch duration)) (DL.map upperLine [0..]))
   | otherwise = DL.foldr (<>) blank (DL.take (symbolLowerLinesNum (Note octave pitch duration)) (DL.map lowerLine [0..]))
 addLines (Rest duration) = blank
@@ -24,7 +24,7 @@ symbolUpperLinesNum :: Symbol -> Int
 symbolUpperLinesNum (Note 6 A _) = 1
 symbolUpperLinesNum (Note 6 As _) = 1
 symbolUpperLinesNum (Note 6 B _) = 1
-symbolUpperLinesNum (Note octave pitch duration) = 2 + pitchUpperLine pitch + (round (octaveToDouble octave - 2) * 3)
+symbolUpperLinesNum (Note octave pitch duration) = 2 + pitchUpperLine pitch + (round (octave - 7) * 3)
 symbolUpperLinesNum (Rest duration) = 0
 
 -- This function returns the number of extra low lines
@@ -33,7 +33,7 @@ symbolLowerLinesNum (Note 5 C _) = 1
 symbolLowerLinesNum (Note 5 Cs _) = 1
 symbolLowerLinesNum (Note 5 D  _) = 0
 symbolLowerLinesNum (Note 5 Ds _) = 0
-symbolLowerLinesNum (Note octave pitch _) = pitchLowerLine pitch - (round (octaveToDouble octave + 1) * 3)
+symbolLowerLinesNum (Note octave pitch _) = pitchLowerLine pitch - (round (octave - 4) * 3)
 symbolLowerLinesNum (Rest _) = 0
 
 -- This function returns the number of required lines for each high pitch
