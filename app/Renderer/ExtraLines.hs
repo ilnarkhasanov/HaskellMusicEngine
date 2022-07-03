@@ -14,11 +14,9 @@ upperLine dy = translated 0 (1 + (1/5) * dy) (solidRectangle 0.5 0.015)
 
 -- This function adds the extra lines to the picture
 addLines :: Symbol -> Picture
-addLines (Note octave pitch duration)
-  | (octave - 5) > 0
-    = mconcat (map upperLine [0..end])
-  | otherwise = mconcat (map lowerLine [0..end])
-      where 
+addLines (Note octave pitch duration) = mconcat (map lineFunc [0..end])
+    where
+        lineFunc = if (octave - 5) > 0 then upperLine else lowerLine
         end = fromIntegral (symbolLowerLinesNum (Note octave pitch duration))
 addLines (Rest _) = blank
 
