@@ -1,14 +1,25 @@
 module Main where
 
-import SampleModule
+import Codec.Midi
 
+import SampleModule
+import Common
+import MelodyMidi
+import Renderer.Renderer
+
+import CodeWorld
 
 sampleModuleMain :: IO ()
 sampleModuleMain = showSamplePicture
 
-
 run :: IO ()
 run = visualise
+
+myMidi :: Midi
+myMidi = Midi { fileType = MultiTrack, 
+                timeDiv  = TicksPerBeat 24, 
+                tracks   = [compositionToMidi myComposition] 
+    }
 
 convertToMidi :: IO ()
 convertToMidi = exportFile "my-midi.mid" myMidi

@@ -1,7 +1,11 @@
-module Renderer where
+module Renderer.Renderer where
 
 import CodeWorld
 
+import Common
+import Sprites
+import Renderer.ExtraLines
+import Renderer.Translators
 
 -- This function renders n staffs on the screen (n depends on the length of the melody)
 staffRenderer :: Int -> Picture
@@ -27,7 +31,7 @@ durSum (Composition (symbol:symbols)) = symbolLength symbol + durSum (Compositio
 -- This function renders symbol to the picture
 symbolToPicture :: Symbol -> Picture
 symbolToPicture (Note octave pitch duration) = addLines (Note octave pitch duration)
-  <> translated (-1/5) ((pitchHeight pitch) + ((octave - 5) * 0.7)) (noteDurToPicture duration 
+  <> translated (-1/5) ((pitchHeight pitch) + (fromIntegral (octave - 5) * 0.7)) (noteDurToPicture duration 
   <> (translated (-1/10) (-1/5) (pitchSharped pitch)))
 symbolToPicture (Rest duration) = translated (-1/5) 0 (restDurToPicture duration)
 

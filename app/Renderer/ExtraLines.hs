@@ -1,6 +1,8 @@
-module ExtraLines where
+module Renderer.ExtraLines where
 
+import Data.List as DL
 import CodeWorld
+
 import Common
 
 -- This is the spring for the extra line if the symbol is too low
@@ -24,7 +26,7 @@ symbolUpperLinesNum :: Symbol -> Int
 symbolUpperLinesNum (Note 6 A _) = 1
 symbolUpperLinesNum (Note 6 As _) = 1
 symbolUpperLinesNum (Note 6 B _) = 1
-symbolUpperLinesNum (Note octave pitch duration) = 2 + pitchUpperLine pitch + (round (octave - 7) * 3)
+symbolUpperLinesNum (Note octave pitch duration) = 2 + pitchUpperLine pitch + ((octave - 7) * 3)
 symbolUpperLinesNum (Rest duration) = 0
 
 -- This function returns the number of extra low lines
@@ -33,7 +35,7 @@ symbolLowerLinesNum (Note 5 C _) = 1
 symbolLowerLinesNum (Note 5 Cs _) = 1
 symbolLowerLinesNum (Note 5 D  _) = 0
 symbolLowerLinesNum (Note 5 Ds _) = 0
-symbolLowerLinesNum (Note octave pitch _) = pitchLowerLine pitch - (round (octave - 4) * 3)
+symbolLowerLinesNum (Note octave pitch _) = pitchLowerLine pitch - ((octave - 4) * 3)
 symbolLowerLinesNum (Rest _) = 0
 
 -- This function returns the number of required lines for each high pitch

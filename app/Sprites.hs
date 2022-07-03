@@ -1,7 +1,10 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Sprites where
 
 import CodeWorld
 import Data.List as DL
+import Data.Text
 
 -- This is the sprite for the whole note
 wholeNote :: Picture

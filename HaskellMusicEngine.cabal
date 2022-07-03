@@ -30,6 +30,11 @@ executable HaskellMusicEngine
     other-modules:
         Common
         SampleModule
+        MelodyMidi
+        Renderer.Translators
+        Renderer.ExtraLines 
+        Renderer.Renderer 
+        Sprites
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -39,4 +44,6 @@ executable HaskellMusicEngine
     build-depends:
          base >=4.7 && < 5
       ,  codeworld-api
+      ,  HCodecs
+      ,  text == 1.2.4.1
     default-language: Haskell2010

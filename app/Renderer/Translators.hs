@@ -1,4 +1,4 @@
-module Translators where
+module Renderer.Translators where
 
 import CodeWorld
 import Common
