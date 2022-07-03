@@ -4,12 +4,17 @@
 -- | Provides a generic means to parse arbitrary one-dimensional
 -- | input given a determenistic transducer (state machine with output)
 -- | for the corresponding alphabet.
+--
+-- Note: the transducer, in fact, does not necessairly have to be a state
+-- machine. For example, one could easily solve the braces pairs evaluation
+-- problem with `TOP.parse`, using lists as states (that would effectively be
+-- a pushdown automaton).
 module TOP (
    parse,
 ) where
 
--- | Parse a sequence of tokens with a transducer (state machine with output),
--- | represented with initial state, final state checker, and transition function.
+-- | Parse a sequence of tokens with a transducer represented with initial state,
+-- | final state checker, and transition function.
 -- |
 -- | Transition function, given a state and a token, should return `Nothing` if
 -- | the transition is invalid (which fails the parse); `Just (nextState, Nothing)`
