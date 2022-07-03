@@ -1,6 +1,5 @@
 module Renderer.Translators where
 
-import CodeWorld
 import Common
 
 -- This is the function that corresponds each pitch to some integer
@@ -34,16 +33,15 @@ symbolLength (Rest Sixteen) = 0.375
 
 -- This function returns the height of the note in the staff
 pitchHeight :: Pitch -> Double
-pitchHeight C = (-1/25)
-pitchHeight Cs = (-1/25)
-pitchHeight D = (-1/25) + (0.1)
-pitchHeight Ds = (-1/25) + (0.1)
-pitchHeight E = (-1/25) + 2 * (0.1)
-pitchHeight F = (-1/25) + 3 * (0.1)
-pitchHeight Fs = (-1/25) + 3 * (0.1)
-pitchHeight G = (-1/25) + 4 * (0.1)
-pitchHeight Gs = (-1/25) + 4 * (0.1)
-pitchHeight A = (-1/25) + 5 * (0.1)
-pitchHeight As = (-1/25) + 5 * (0.1)
-pitchHeight B = (-1/25) + 6 * (0.1)
-
+pitchHeight C = -1/25
+pitchHeight Cs = -1/25
+pitchHeight D = (-1/25) + 0.1
+pitchHeight Ds = (-1/25) + 0.1
+pitchHeight E = (-1/25) + 2 * 0.1
+pitchHeight F = (-1/25) + 3 * 0.1
+pitchHeight Fs = (-1/25) + 3 * 0.1
+pitchHeight G = (-1/25) + 4 * 0.1
+pitchHeight Gs = (-1/25) + 4 * 0.1
+pitchHeight A = (-1/25) + 5 * 0.1
+pitchHeight As = (-1/25) + 5 * 0.1
+pitchHeight B = (-1/25) + 6 * 0.1

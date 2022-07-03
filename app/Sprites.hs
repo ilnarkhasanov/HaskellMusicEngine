@@ -3,8 +3,7 @@
 module Sprites where
 
 import CodeWorld
-import Data.List as DL
-import Data.Text
+import Data.Text ()
 
 -- This is the sprite for the whole note
 wholeNote :: Picture
@@ -15,7 +14,7 @@ halfNote :: Picture
 halfNote = lettering "\x1D15E"
 
 -- This is the sprite for the quarter note
-quarterNote :: Picture 
+quarterNote :: Picture
 quarterNote = lettering "\x1D15F"
 
 -- This is the sprite for the eight note
@@ -35,7 +34,7 @@ halfRest :: Picture
 halfRest = translated 0 0.105 (scaled 1 0.8  (lettering "\x1D13C"))
 
 -- This is the sprite for the quarter rest
-quarterRest :: Picture 
+quarterRest :: Picture
 quarterRest = translated 0 0.1 (lettering "\x1D13D")
 
 -- This is the sprite for the eight rest
@@ -56,8 +55,9 @@ trebleClef = scaled 1 1.2 (translated (-12) 0.27 (lettering "\x1D11E"))
 
 -- This is the sprite for the staff
 staff :: Picture
-staff = (trebleClef <> DL.foldr (<>) blank (DL.take 5 (DL.map line [0..]))) 
-  <> (DL.foldr (<>) blank (DL.take 4 (DL.map tactLine [0..])))
+-- staff = (trebleClef <> foldr (<>) blank (take 5 (map line [0..])))
+--   <> foldr (<>) blank (take 4 (map tactLine [0..]))
+staff = trebleClef <> mconcat (map line [0..4] ++ map tactLine [0..3])
 
 
 -- This is the sprite for the line

@@ -10,29 +10,31 @@ import Renderer.Translators
 -- This function renders n staffs on the screen (n depends on the length of the melody)
 staffRenderer :: Int -> Picture
 staffRenderer 0 = blank
-staffRenderer n = staff <> (translated 0 (-2) (staffRenderer (n-1)))
+staffRenderer n = staff <> translated 0 (-2) (staffRenderer (n-1))
 
 -- This function this gets the composition in Melody and renders the picture correspondingly
 compositionRenderer :: Composition -> Double -> Picture
 compositionRenderer (Composition []) _ = blank
-compositionRenderer (Composition (symbol:symbols)) n = translated (n - (24*(getRowNumber n)*(-1/2))) 
+compositionRenderer (Composition (symbol:symbols)) n = translated (n - (24 * getRowNumber n * (-1 / 2)))
   (getRowNumber n) (symbolToPicture symbol)
-  <> compositionRenderer (Composition symbols) (n+symbolLength symbol)
-  
+  <> compositionRenderer (Composition symbols) (n + symbolLength symbol)
+
 -- This function gets the number of the row according to the x-axis coordinate
 getRowNumber :: Double -> Double
-getRowNumber x = (-2 * (fromIntegral (floor (x/24))))
+getRowNumber x = -2 * fromIntegral (floor (x/24))
 
 -- This function counts the total durarion of the composition
 durSum :: Composition -> Double
-durSum (Composition []) = 0
-durSum (Composition (symbol:symbols)) = symbolLength symbol + durSum (Composition symbols)
+durSum (Composition composition) = sum (map symbolLength composition)
+-- Old:
+-- durSum (Composition []) = 0
+-- durSum (Composition (symbol:symbols)) = symbolLength symbol + durSum (Composition symbols)
 
 -- This function renders symbol to the picture
 symbolToPicture :: Symbol -> Picture
 symbolToPicture (Note octave pitch duration) = addLines (Note octave pitch duration)
-  <> translated (-1/5) ((pitchHeight pitch) + (fromIntegral (octave - 5) * 0.7)) (noteDurToPicture duration 
-  <> (translated (-1/10) (-1/5) (pitchSharped pitch)))
+  <> translated (-1/5) (pitchHeight pitch + (fromIntegral (octave - 5) * 0.7)) (noteDurToPicture duration
+  <> translated (-1/10) (-1/5) (pitchSharped pitch))
 symbolToPicture (Rest duration) = translated (-1/5) 0 (restDurToPicture duration)
 
 

@@ -12,9 +12,6 @@ import CodeWorld
 sampleModuleMain :: IO ()
 sampleModuleMain = showSamplePicture
 
-run :: IO ()
-run = visualise
-
 myMidi :: Midi
 myMidi = Midi { fileType = MultiTrack, 
                 timeDiv  = TicksPerBeat 24, 
