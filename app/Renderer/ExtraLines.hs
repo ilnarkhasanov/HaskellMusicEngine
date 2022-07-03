@@ -1,6 +1,5 @@
 module Renderer.ExtraLines where
 
-import Data.List as DL
 import CodeWorld
 
 import Common
@@ -16,9 +15,11 @@ upperLine dy = translated 0 (1 + (1/5) * dy) (solidRectangle 0.5 0.015)
 -- This function adds the extra lines to the picture
 addLines :: Symbol -> Picture
 addLines (Note octave pitch duration)
-  | (octave - 5)> 0
-    = mconcat (DL.take (symbolUpperLinesNum (Note octave pitch duration)) (DL.map upperLine [0..]))
-  | otherwise = mconcat (DL.take (symbolLowerLinesNum (Note octave pitch duration)) (DL.map lowerLine [0..]))
+  | (octave - 5) > 0
+    = mconcat (map upperLine [0..end])
+  | otherwise = mconcat (map lowerLine [0..end])
+      where 
+        end = fromIntegral (symbolLowerLinesNum (Note octave pitch duration))
 addLines (Rest _) = blank
 
 -- This function returns the number of extra high lines

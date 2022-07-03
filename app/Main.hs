@@ -6,7 +6,6 @@ import SampleModule
 import Common
 import MelodyMidi
 import Renderer.Renderer
-import Transposed
 
 import CodeWorld
 

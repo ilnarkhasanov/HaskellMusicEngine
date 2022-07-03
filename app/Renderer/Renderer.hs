@@ -33,10 +33,9 @@ durSum (Composition composition) = sum (map symbolLength composition)
 -- This function renders symbol to the picture
 symbolToPicture :: Symbol -> Picture
 symbolToPicture (Note octave pitch duration) = addLines (Note octave pitch duration)
-  <> translated (-1/5) (pitchHeight pitch + (fromIntegral (octave - 5) * 0.7)) (noteDurToPicture duration
-  <> translated (-1/10) (-1/5) (pitchSharped pitch))
+  <> translated (-1/5) (pitchHeight pitch + (fromIntegral (octave - 5) * 0.7)) 
+  (noteDurToPicture duration <> translated (-1/10) (-1/5) (pitchSharped pitch))
 symbolToPicture (Rest duration) = translated (-1/5) 0 (restDurToPicture duration)
-
 
 -- This function checks if the pitch is sharped, then sharp sign appends
 pitchSharped :: Pitch -> Picture

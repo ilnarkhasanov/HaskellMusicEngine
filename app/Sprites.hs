@@ -2,6 +2,8 @@
 
 module Sprites where
 
+-- We import CodeWorld for rendering symbols
+-- Wr import Data.Text() for the using "lettering" function
 import CodeWorld
 import Data.Text ()
 
