@@ -7,5 +7,56 @@ sampleModuleMain :: IO ()
 sampleModuleMain = showSamplePicture
 
 
+run :: IO ()
+run = visualise
+
+convertToMidi :: IO ()
+convertToMidi = exportFile "my-midi.mid" myMidi
+
+visualise :: IO ()
+visualise = drawingOf (translated (-11) (0) (compositionRenderer myComposition 0) 
+  <> staffRenderer (ceiling ((durSum (myComposition))/24)))
+
+-- This is our composition
+myComposition :: Composition
+myComposition = Composition [Rest Quarter,
+                      Note 5 G Quarter,
+                      Note 6 C Quarter,
+                      Note 6 Ds Quarter,
+                      Note 6 D Quarter,
+                      Note 6 C Quarter,
+                      Note 6 Ds Quarter,
+                      Note 6 C Quarter,
+                      Note 6 D Quarter,
+                      Note 6 C Quarter,
+                      Note 5 Gs Quarter,
+                      Note 5 As Quarter,
+                      Note 5 G Half,
+                      Rest Half,
+                      Rest Quarter,
+                      Note 5 G Quarter,
+                      Note 6 C Quarter,
+                      Note 6 Ds Quarter,
+                      Note 6 D Quarter,
+                      Note 6 C Quarter,
+                      Note 6 Ds Quarter,
+                      Note 6 C Quarter,
+                      Note 6 D Quarter,
+                      Note 6 C Quarter,
+                      Note 5 G Quarter,
+                      Note 5 Fs Quarter,
+                      Note 5 F Half,
+                      Rest Half,
+                      Rest Quarter,
+                      Note 5 F Quarter,
+                      Note 5 Gs Quarter,
+                      Note 5 B Quarter,
+                      Note 6 D Whole,
+                      Rest Quarter,
+                      Note 5 F Quarter,
+                      Note 5 Gs Quarter,
+                      Note 5 B Quarter,
+                      Note 6 C Whole]
+
 main :: IO ()
 main = return ()  -- No main function yet
