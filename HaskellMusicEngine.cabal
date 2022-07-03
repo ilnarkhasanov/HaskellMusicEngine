@@ -30,6 +30,13 @@ executable HaskellMusicEngine
     other-modules:
         Common
         SampleModule
+
+        MelodyMidi
+        Renderer.Translators
+        Renderer.ExtraLines 
+        Renderer.Renderer 
+        Sprites
+
         TOP
         TxtCompositionParser
 
@@ -42,4 +49,6 @@ executable HaskellMusicEngine
          base >=4.7 && < 5
       ,  strings >= 1.1 && < 2
       ,  codeworld-api
+      ,  HCodecs >= 0.5.2 && < 0.6
+      ,  text >= 1.2.4 && < 2
     default-language: Haskell2010
