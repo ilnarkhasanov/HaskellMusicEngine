@@ -6,6 +6,7 @@ import SampleModule
 import Common
 import MelodyMidi
 import Renderer.Renderer
+import Transposed
 
 import CodeWorld
 
@@ -21,9 +22,9 @@ myMidi = Midi { fileType = MultiTrack,
 convertToMidi :: IO ()
 convertToMidi = exportFile "my-midi.mid" myMidi
 
-visualise :: IO ()
-visualise = drawingOf (translated (-11) (0) (compositionRenderer myComposition 0) 
-  <> staffRenderer (ceiling ((durSum (myComposition))/24)))
+visualise :: Composition -> IO ()
+visualise composition = drawingOf (translated (-11) 0 (compositionRenderer composition 0) 
+  <> staffRenderer (ceiling (durSum composition / 24)))
 
 -- This is our composition
 myComposition :: Composition
