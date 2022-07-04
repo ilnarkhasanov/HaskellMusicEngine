@@ -32,6 +32,51 @@ module TOP (
 --
 -- If the parsing succeeded, `Right outputList` is returned, where `outputList` is the
 -- list of all outputs produced by the transducer during the parsing process.
+--
+-- Examples:
+-- 1. Simple FSA that accepts strings that end with character `'a'` and outputs
+--    all other symbols. The state is just a `Bool`.
+--
+-- >>> initialState = False  -- Empty string does not end with `'a'`
+-- >>> isFinal = id
+-- >>> :{
+--   transition _state 'a' = Just (True, Nothing)
+--   transition _state c   = Just (False, Just c)
+-- :}
+--
+-- >>> parse "abc" initialState isFinal transition
+-- Left ("bc",Nothing)
+--
+-- >>> parse "cbabaca" initialState isFinal transition
+-- Right "cbbc"
+--
+-- 2. A PDA that checks a parenthesis sequence for correctness, but does not produce
+--    any output. The state is just the current stack (of type `[Char]`).
+--
+--    Note: when parsing a parenthesis sequence, you probably want to not only check
+--    that the sequence is correct, but also to parse it into some data structure
+--    (e.g. a parenthesis tree). Note, however, that TOP stands for Transducers-based
+--    *One-dimensional* Polymorphic Parser, and tree is not a linear data structure.
+--    So, even though it is technically possible to parse such a tree with TOP, it was
+--    not designed to parse tree-like structures, so the code for that would get very
+--    complicated and hard to read.
+--
+-- >>> initialState = []
+-- >>> isFinal = null
+-- >>> :{
+--   transition stack        '(' = Just ('(':stack, Nothing)
+--   transition ('(':stack)  ')' = Just (stack, Nothing)
+--   transition _ _              = Nothing
+-- :}
+--
+-- >>> parse "()(())" initialState isFinal transition
+-- Right []
+--
+-- >>> parse "(()" initialState isFinal transition
+-- Left ("(()",Nothing)
+--
+-- >>> parse "())" initialState isFinal transition
+-- Left ("",Just ')')
 parse
     :: [token]          -- ^ What to parse
     -> state            -- ^ Initial state
