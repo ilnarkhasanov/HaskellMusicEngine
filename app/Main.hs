@@ -14,21 +14,48 @@ import TxtCompositionParser
 import CodeWorld
 import System.Environment (getArgs)
 
+
+
+
+
+data State = State {
+  time :: Double,
+  posX :: Double,
+  posY :: Double,
+  line :: Double,
+  composition :: Composition
+}
+drawLine :: State -> Picture
+drawLine (State _ px py l _) = translated px (py-l) (colored black (solidRectangle 0.07 1.5))
+
+initState :: Composition -> State
+initState comp = State 0 (-11) (0.3) 0 comp
+
+updateState :: State -> State
+updateState (State t px py l comp)
+  | px > 8 = State (t+1) (-11) py (l+2) comp
+  | otherwise = State (t+1) (px + 0.07) py l comp
+
+handleState :: Event -> State -> State
+handleState (TimePassing _) state = updateState state
+handleState _ state = state
+
+
 sampleModuleMain :: IO ()
 sampleModuleMain = showSamplePicture
 
 myMidi :: Midi
-myMidi = Midi { fileType = MultiTrack, 
-                timeDiv  = TicksPerBeat 24, 
-                tracks   = [compositionToMidi myComposition] 
+myMidi = Midi { fileType = MultiTrack,
+                timeDiv  = TicksPerBeat 24,
+                tracks   = [compositionToMidi myComposition]
     }
 
 exportMidi :: String -> Midi -> IO ()
 exportMidi path midi = exportFile path midi
 
-visualize :: Composition -> IO ()
-visualize composition = drawingOf (translated (-11) 0 (compositionRenderer composition 0) 
-  <> staffRenderer (ceiling (durSum composition / 24)))
+visualize :: State -> Picture
+visualize (State t px py l composition) = translated (-11) 0 (compositionRenderer composition 0)
+  <> staffRenderer (ceiling (durSum composition / 24)) <> drawLine (State t px py l composition)
 
 -- This is our composition
 myComposition :: Composition
@@ -83,7 +110,7 @@ main = do
          Left err -> do
              putStrLn "Failed to parse the composition. Additional info:"
              print err
-         Right composition -> do
-             print composition
+         Right comp -> do
+             print comp
              -- exportMidi (filePath ++ ".midi") (compositionToMidi composition)
-             visualize composition
+             activityOf (initState comp) handleState visualize
