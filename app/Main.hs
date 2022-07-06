@@ -7,6 +7,8 @@ import Common
 import MelodyMidi
 import Renderer.Renderer
 import System.IO
+import System.Process
+import Text.Printf
 
 import SampleModule
 import TxtCompositionParser
@@ -25,6 +27,10 @@ data State = State {
   line :: Double,
   composition :: Composition
 }
+
+outputFilePath :: String
+outputFilePath = "~/Documents/HME/HaskellMusicEngine/images/Midi-example.mid" -- path to the exported midi
+
 drawLine :: State -> Picture
 drawLine (State _ px py l _) = translated px (py-l) (colored black (solidRectangle 0.07 1.5))
 
@@ -112,5 +118,6 @@ main = do
              print err
          Right comp -> do
              print comp
-             -- exportMidi (filePath ++ ".midi") (compositionToMidi composition)
+             --exportMidi (filePath ++ ".midi") (compositionToMidi composition)
+             runCommand $ printf "wildmidi %s" outputFilePath
              activityOf (initState comp) handleState visualize
