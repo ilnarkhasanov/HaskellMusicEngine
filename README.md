@@ -2,13 +2,14 @@
 
 ![Logo.](images/logo.png)
 
-This is a project using `codeworld-api` package, ready to be used with either Cabal or Stack. The project also contains `hspec` (with automatic discovery of specification files) and `doctest` test suites.
+This is a project using `codeworld-api` package, ready to be used with Cabal.
 
 The project can be used to either visualise text notation with sheet music and convert it into MIDI file. 
 
 ## Prerequisites
 
-This project can be build with Cabal and GHC 8.10.7 or with Stack tool.
+This project can be build with Cabal and GHC 8.10.7.
+
 We recommend that you use [ghcup](https://www.haskell.org/ghcup/) to install these.
 
 There is IDE support for Cabal and Haskell through Haskell Language Server, in particular, there seems to be strong support for Haskell development in Visual Studio Code.
@@ -26,35 +27,29 @@ Write your composition in an array format into myComposition, where each element
 
 - Duration - how long the note/rest will last. One of the following, in descending order: Whole, Half, Quarter, Eigth, Sixteen.
 
-To convert your notation into midi, put convertToMidi into run function. To write it with sheet music, put visualize there.
+To convert text notation into Midi file put `file_name/path` as an argument.
 
-![Notation used in the exampe at the top.](images/Notation-example.txt)
+[Notation used in the exampe at the top.](images/Notation-example.txt)
 
-![Midi output from this example.](images/Midi-example.mid)
+[Midi output from this example.](images/Midi-example.mid)
 
-![Output in mp3 format.](images/Mp3-example.mp3)
+[Output in mp3 format.](images/Mp3-example.mp3)
 
 ### Using Cabal
-
-To build and run a project (without tests), use
-
-```sh
-cabal v2-run --disable-tests
-```
-
-from the project directory. This will download all the necessary dependencies, compile the project and start `CodeWorld canvas server` at http://localhost:3000
 
 To simply build the project, run
 
 ```sh
 cabal v2-build
+cabal install --installdir=. --install-method=copy
 ```
 
-
-#### Freezing dependencies
-
-When you add/change dependencies of the project it is a good idea to freeze the used versions, to ensure the project will be successfully built on another machine at another time. To freeze dependencies, run
+To run the project
 
 ```sh
-cabal v2-freeze
+./HaskellMusicEngine <file_to_process>
 ```
+
+This will start `CodeWorld canvas server` at http://localhost:3000
+
+# Enjoy!
